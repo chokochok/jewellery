@@ -27,6 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'my_account'
+LOGOUT_REDIRECT_URL = 'index'
+
+CART_SESSION_ID = 'cart'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2  # 2 weeks
+
+THUMBNAIL_COLORSPACE = None
+THUMBNAIL_PRESERVE_FORMAT = True
 
 # Application definition
 
@@ -40,6 +49,7 @@ INSTALLED_APPS = [
     'mainapp.apps.MainappConfig',
     'userapp.apps.UserappConfig',
     'productapp.apps.ProductappConfig',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'productapp.context_processors.cart',
             ],
         },
     },
@@ -121,6 +132,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

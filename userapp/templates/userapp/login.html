@@ -1,0 +1,20 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl">Login</h1>
+
+    <form method="post" action=".">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="py-4">
+                <label class="block">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+
+        <button class="py-4 px-8 bg-cyan-800 text-white">Login</button>
+    </form>
+{% endblock %}

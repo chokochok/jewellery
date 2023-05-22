@@ -1,0 +1,15 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl">{{ title }}</h1>
+
+    <h2 class="text-xs text-gray-600">Search result for "{{ query }}":</h2>
+
+    {% if products %}
+        {% include 'productapp/partials/products.html' %}
+    {% else %}
+        <p class="text-gray-600">No products found.</p>
+    {% endif %}
+{% endblock %}
