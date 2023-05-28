@@ -9,7 +9,7 @@ def index(request):
     categories = [product.category for product in products]
     # drop duplicates
     categories = list(set(categories))
-    return render(request, 'mainapp/index.html', {'title': 'Home', 'products': products, 'categories': categories})
+    return render(request, 'mainapp/index.html', {'title': 'Jewellery', 'products': products, 'categories': categories})
 
 
 def about(request):
