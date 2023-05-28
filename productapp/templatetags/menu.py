@@ -5,6 +5,6 @@ register = template.Library()
 
 
 @register.inclusion_tag('mainapp/menu.html')
-def menu():
+def menu(request):
     categories = Category.objects.all()
-    return {'categories': categories}
+    return {'categories': categories, 'request': request}

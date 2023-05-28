@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^0r**8fxrns(=lo*v9@8#9_u+5)%rp%y$$u+*2kno9rhrc+&nf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'https://jewellery.herokuapp.com/']
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'my_account'
@@ -38,7 +38,6 @@ THUMBNAIL_COLORSPACE = None
 THUMBNAIL_PRESERVE_FORMAT = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -67,8 +66,7 @@ ROOT_URLCONF = 'jewellery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,8 +88,12 @@ WSGI_APPLICATION = 'jewellery.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'demjjrfe0neg6d',
+        'USER': 'hwirroryxuhkkg',
+        'PASSWORD': '799c478370e63e6a41c1422e3df317a1cd48c4c3a33dc39187b532af4791b944',
+        'HOST': 'ec2-52-50-161-219.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 

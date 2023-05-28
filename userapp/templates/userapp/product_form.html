@@ -3,15 +3,35 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl">{{ title }}</h1>
+<section class="page-add cart-page-add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="page-breadcrumb">
+                    <h2>{{ title }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="login-form">
+            <form method="post" action="." enctype="multipart/form-data">
+                {% csrf_token %}
 
-    <form method="post" action="." enctype="multipart/form-data" class="space-y-5">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="py-4 px-8 bg-green-500 text-white rounded hover:bg-green-700">Submit</button>
-    </form>
-
-    {% if product %}
-        <a href="{% url 'delete_product' product.id %}" class="mt-2 inline-block py-4 px-8 bg-red-500 text-white rounded hover:bg-red-700">Delete</a>
-    {% endif %}
+                {% for field in form %}
+                    <div class="py-4">
+                        <label class="block">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="col-lg-12">
+                    <button type="submit">Submit</button>
+                </div>
+                {% if product %}
+                    <div class="total-info mt-3">
+                        <a href="{% url 'delete_product' product.id %}" class="primary-btn chechout-btn">Delete</a>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
 {% endblock %}

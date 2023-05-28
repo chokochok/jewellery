@@ -4,8 +4,12 @@ from productapp.models import Product
 
 # Create your views here.
 def index(request):
-    products = Product.objects.all()[:6]
-    return render(request, 'mainapp/index.html', {'title': 'Home', 'products': products})
+    # Select last 8 products by date
+    products = Product.objects.all().order_by('-created')[:8]
+    categories = [product.category for product in products]
+    # drop duplicates
+    categories = list(set(categories))
+    return render(request, 'mainapp/index.html', {'title': 'Home', 'products': products, 'categories': categories})
 
 
 def about(request):

@@ -3,9 +3,23 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl pb-2">{{ title }}</h1>
+<!-- Page Add Section Begin -->
+<section class="page-add">
+    <div class="container">
+        <div class="col-lg-8">
+            <div class="page-breadcrumb">
+                <h2>{{ title }}<span>.</span></h2>
+                <a href="{% url 'index' %}">Home</a>
+                <a class="active" href="">{{ title }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page Add Section End -->
 
-    <hr>
-
-    {% include 'productapp/partials/products.html' %}
+<section class="categories-page spad">
+    <div class="container">
+        {% include 'productapp/partials/products.html' %}
+    </div>
+</section>
 {% endblock %}

@@ -1,7 +1,131 @@
 {% extends 'mainapp/base.html' %}
+{% load static %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    {% include 'productapp/partials/products.html' %}
+    <!-- Hero Slider Begin -->
+    <section class="hero-slider">
+        <div class="hero-items owl-carousel">
+            <div class="single-slider-item set-bg" data-setbg="{% static 'mainapp/img/slider-1.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>2019</h1>
+                            <h2>Lookbook.</h2>
+                            <a href="#" class="primary-btn">See More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider-item set-bg" data-setbg="{% static 'mainapp/img/slider-2.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>2019</h1>
+                            <h2>Lookbook.</h2>
+                            <a href="#" class="primary-btn">See More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider-item set-bg" data-setbg="{% static 'mainapp/img/slider-3.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>2019</h1>
+                            <h2>Lookbook.</h2>
+                            <a href="#" class="primary-btn">See More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Slider End -->
+
+    <!-- Features Section Begin -->
+    <section class="features-section spad">
+        <div class="features-ads">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="single-features-ads first">
+                            <img src="{% static 'mainapp/img/icons/f-delivery.png' %}" alt="">
+                            <h4>Free shipping</h4>
+                            <p>Enjoy the convenience of free shipping on your purchases, allowing you to receive your
+                                desired items without any additional cost for delivery. Shop with peace of mind knowing
+                                that your order will be shipped to your doorstep without any extra fees.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-features-ads second">
+                            <img src="{% static 'mainapp/img/icons/coin.png' %}" alt="">
+                            <h4>100% Money back </h4>
+                            <p>We stand behind the quality of our products/services. If you are not completely satisfied
+                                with your purchase, we offer a 100% money-back guarantee. This means that if you're not
+                                happy with your order for any reason, we will refund your entire purchase price,
+                                ensuring your satisfaction and confidence in our offerings.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-features-ads">
+                            <img src="{% static 'mainapp/img/icons/chat.png' %}" alt="">
+                            <h4>Online support 24/7</h4>
+                            <p>Our dedicated team of experts is available round the clock to assist you with any queries
+                                or concerns you may have. Whether it's day or night, our online support is here to
+                                provide prompt and reliable assistance. Rest assured that we are committed to providing
+                                excellent customer service whenever you need it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section End -->
+
+    <!-- Latest Product Begin -->
+    <section class="latest-products spad">
+        <div class="container">
+            <div class="product-filter">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="section-title">
+                            <h2>Latest Products</h2>
+                        </div>
+                        <ul class="product-controls">
+                            <li data-filter="*">All</li>
+                            {% for category in categories %}
+                                <li data-filter=".{{ category.slug }}">{{ category.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% include 'productapp/partials/products.html' %}
+        </div>
+    </section>
+    <!-- Latest Product End -->
+
+    <!-- Logo Section Begin -->
+    <div class="logo-section spad">
+        <div class="logo-items owl-carousel">
+            <div class="logo-item">
+                <img src="{% static 'mainapp/img/logos/logo-1.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'mainapp/img/logos/logo-2.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'mainapp/img/logos/logo-3.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'mainapp/img/logos/logo-4.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'mainapp/img/logos/logo-5.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Logo Section End -->
 {% endblock %}

@@ -65,20 +65,18 @@ def checkout(request):
     return render(request, 'productapp/checkout.html', {'title': 'Checkout', 'cart': cart, 'form': form})
 
 
-def search(request):
-    query = request.GET.get('q')
-    products = Product.objects.filter(
-        Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
-    )
-    return render(request, 'productapp/search.html', {'title': 'Search', 'products': products, 'query': query})
-
-
 def category_detail(request, slug):
+    if slug == 'all':
+        products = Product.objects.all()
+        return render(request, 'productapp/category_detail.html', {'title': 'All products', 'products': products})
     category = get_object_or_404(Category, slug=slug)
     products = category.products.all()
-    return render(request, 'productapp/category_detail.html', {'title': category.name, 'category': category, 'products': products})
+    return render(request, 'productapp/category_detail.html',
+                  {'title': category.name, 'category': category, 'products': products})
 
 
 def product_detail(request, category_slug, slug):
     product = get_object_or_404(Product, slug=slug)
-    return render(request, 'productapp/product_detail.html', {'title': product.name, 'product': product})
+    related_products = Product.objects.filter(category__slug=category_slug).exclude(slug=slug)[:4]
+    return render(request, 'productapp/product_detail.html',
+                  {'title': product.name, 'product': product, 'related_products': related_products})

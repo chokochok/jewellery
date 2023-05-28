@@ -1,67 +1,184 @@
+{% load static %}
 {% load menu %}
-<!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="zxx">
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" type="image/ico" href="{% static 'mainapp/img/favicon.ico' %}">
 
-        {% block stylesheets %}
-        {% endblock %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
 
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body>
-        <nav class="max-w-4xl mx-auto py-4 px-6 flex items-center justify-between bg-cyan-600">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'mainapp/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mainapp/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mainapp/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mainapp/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mainapp/css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mainapp/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}" type="text/css">
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Search model -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <label for="search-input"></label><input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="inner-header">
             <div class="logo">
-                <a href="{% url 'index' %}" class="text-2xl text-white">Jewellery</a>
+                <a href="{% url 'index' %}"><img src="{% static 'mainapp/img/logo.png' %}" alt=""></a>
             </div>
-
-            <div class="search">
-                <form method="get" action="/search/" class="flex items-center space-x-4">
-                    <input type="search" name="q" placeholder="Search" class="rounded-xl py-2 px-4 bg-white text-gray-800">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </button>
-                </form>
-            </div>
-
-            <div class="menu flex items-center space-x-4">
-                {% menu %}
+            <div class="header-right align-baseline">
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'my_account' %}" class="py-2 px-4 text-white bg-cyan-800 rounded-xl hover:bg-cyan-900">My account</a>
-                    {% if request.user.userprofile.is_vendor %}
-                    <a href="{% url 'my_store' %}" class="py-2 px-4 text-white bg-cyan-800 rounded-xl hover:bg-cyan-900">My store</a>
-                    {% endif %}
-                    <a href="{% url 'cart_view' %}" class="flex py-2 px-4 text-white bg-cyan-800 rounded-xl hover:bg-cyan-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                        </svg>
-                         ({{ cart|length }})
+                    <a href="{% url 'my_account' %}" class="mr-3">
+                        <img src="{% static 'mainapp/img/icons/man.png' %}" alt="">
                     </a>
-                {% else %}
-                    <a href="{% url 'login' %}" class="py-2 px-4 text-white bg-cyan-800 rounded-xl hover:bg-cyan-900">Log in</a>
-                    <a href="{% url 'signup' %}" class="py-2 px-4 text-white bg-cyan-800 rounded-xl hover:bg-cyan-900">Sign up</a>
                 {% endif %}
+                <a href="{% url 'cart_view' %}">
+                    <img src="{% static 'mainapp/img/icons/bag.png' %}" alt="">
+                    <span>{{ cart|length }}</span>
+                </a>
             </div>
-        </nav>
+            {% if not request.user.is_authenticated %}
+                <div class="user-access mr-5">
+                    <a href="{% url 'signup' %}">Sign up</a>
+                    <a href="{% url 'login' %}" class="in">Log in</a>
+                </div>
+            {% endif %}
+            <nav class="main-menu mobile-menu mr-5">
+                <ul>
+                    {% menu request %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
 
-        <div class="max-w-4xl mx-auto py-4 px-6">
-            {% block content %}
-            {% endblock %}
+{% block content %}
+{% endblock %}
+
+<!-- Footer Section Begin -->
+<footer class="footer-section spad">
+    <div class="container">
+        <div class="newslatter-form">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form action="#">
+                        <label>
+                            <input type="text" placeholder="Your email address">
+                        </label>
+                        <button type="submit">Subscribe to our newsletter</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </body>
-    <nav class="fixed left-1/2 -translate-x-1/2 bottom-0 py-1 px-4 bg-cyan-600">
-        <div class="menu flex space-x-6">
-            <a href="{% url 'index' %}" class="text-white">Home</a>
-            <a href="{% url 'about' %}" class="text-white">About</a>
-            <a href="{% url 'about' %}" class="text-white">Contact</a>
+        <div class="footer-widget">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h4>About us</h4>
+                        <ul>
+                            <li>About Us</li>
+                            <li>Community</li>
+                            <li>Jobs</li>
+                            <li>Shipping</li>
+                            <li>Contact Us</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h4>Customer Care</h4>
+                        <ul>
+                            <li>Search</li>
+                            <li>Privacy Policy</li>
+                            <li>2023 Collection</li>
+                            <li>Shipping & Delivery</li>
+                            <li>Gallery</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li>Free Shipping</li>
+                            <li>Free Returnes</li>
+                            <li>Our Franchising</li>
+                            <li>Terms and conditions</li>
+                            <li>Privacy Policy</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h4>Information</h4>
+                        <ul>
+                            <li>Payment methods</li>
+                            <li>Times and shipping costs</li>
+                            <li>Product Returns</li>
+                            <li>Shipping methods</li>
+                            <li>Conformity of the products</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <p class="text-center text-xs">© Jewellery 2023</p>
+    </div>
+    <div class="social-links-warp">
+        <div class="container">
+            <div class="social-links">
+                <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+                <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+                <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+                <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+                <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+            </div>
         </div>
-    </nav>
+
+        <div class="container text-center pt-5">
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear().toString());</script> All rights reserved</p>
+        </div>
+
+
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="{% static 'mainapp/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'mainapp/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'mainapp/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'mainapp/js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'mainapp/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'mainapp/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'mainapp/js/mixitup.min.js' %}"></script>
+<script src="{% static 'mainapp/js/main.js' %}"></script>
+</body>
+
 </html>

@@ -3,23 +3,42 @@
 {% block title %}{% firstof user.get_full_name user.username %}{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl">{% firstof user.get_full_name user.username %}</h1>
-
-    <div class="flex flex-wrap">
-        {% for product in products %}
-            <div class="product w-1/3 p-2">
-                <a href="{% url 'product_detail' product.category.slug product.slug %}">
-                    {% if product.image %}
-                        <div class="image mb-2">
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                        </div>
-                    {% endif %}
-                    <div class="p-4 bg-gray-200">
-                        <h2 class="text-xl">{{ product.name }}</h2>
-                        <p class="text-sm text-gray-600">${{ product.price }}</p>
-                    </div>
-                </a>
+<section class="page-add cart-page-add">
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-lg-12">
+                <div class="page-breadcrumb">
+                    <h2>{% firstof user.get_full_name user.username %}</h2>
+                </div>
+                <hr>
             </div>
-        {% endfor %}
+        </div>
+        {% if products %}
+            <div class="row align-items-end" id="product-list">
+                {% for product in products %}
+                    <div class="col-lg-3 col-sm-6 mix all {{ product.category.slug }}">
+                        <div class="single-product-item">
+                            <a href="{% url 'edit_product' product.id %}">
+                                <figure>
+                                    {% if product.image %}
+                                        {% load thumbnail %}
+                                        {% thumbnail product.image "500" as im %}
+                                            <img src="{{ im.url }}" alt="{{ product.name }}">
+                                        {% endthumbnail %}
+                                    {% endif %}
+                                </figure>
+                                <div class="product-text">
+                                    <h6>{{ product.name }}</h6>
+                                    <p>${{ product.price }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="mt-6">You have no products yet.</p>
+        {% endif %}
     </div>
+</section>
 {% endblock %}

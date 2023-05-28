@@ -1,20 +1,24 @@
-<div class="flex flex-wrap items-baseline">
+<!-- Categories Page Section Begin -->
+<div class="row align-items-end" id="product-list">
     {% for product in products %}
-        <div class="product w-1/3 p-2">
-            <a href="{% url 'product_detail' product.category.slug product.slug %}">
-                {% if product.image %}
-                    {% load thumbnail %}
-                    {% thumbnail product.image "300" as im %}
-                        <div class="image mb-2">
-                            <img src="{{ im.url }}" alt="{{ product.name }}">
-                        </div>
-                    {% endthumbnail %}
-                {% endif %}
-                <div class="p-4 bg-gray-200">
-                    <h2 class="text-xl">{{ product.name }}</h2>
-                    <p class="text-sm text-gray-600">${{ product.price }}</p>
-                </div>
-            </a>
+        <div class="col-lg-3 col-sm-6 mix all {{ product.category.slug }}">
+            <div class="single-product-item">
+                <a href="{% url 'product_detail' product.category.slug product.slug %}">
+                    <figure>
+                        {% if product.image %}
+                            {% load thumbnail %}
+                            {% thumbnail product.image "500" as im %}
+                                <img src="{{ im.url }}" alt="{{ product.name }}">
+                            {% endthumbnail %}
+                        {% endif %}
+                    </figure>
+                    <div class="product-text">
+                        <h6>{{ product.name }}</h6>
+                        <p>${{ product.price }}</p>
+                    </div>
+                </a>
+            </div>
         </div>
     {% endfor %}
 </div>
+<!-- Categories Page Section End -->

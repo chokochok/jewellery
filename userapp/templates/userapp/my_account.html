@@ -3,32 +3,56 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl">My account</h1>
-
-    <hr>
-
-    <a href="{% url 'logout' %}" class="mt-6 inline-block py-4 px-8 bg-red-400 text-white hover:bg-red-600">Log out</a>
-
-    <h1 class="text-2xl mt-6">My orders</h1>
-
-    <hr>
-
-    {% if orders %}
-        {% for order in orders %}
-            <div class="mt-6">
-                <h2 class="text-xl">Order #{{ order.id }}</h2>
-                <p class="text-gray-600">Created at: {{ order.created }}</p>
-                <p class="text-gray-600">Status: {{ order.updated }}</p>
-                <p class="text-gray-600">Status: {{ order.first_name }}</p>
-                <p class="text-gray-600">Status: {{ order.last_name }}</p>
-                <p class="text-gray-600">Status: {{ order.email }}</p>
-                <p class="text-gray-600">Status: {{ order.city }}</p>
-                <p class="text-gray-600">Status: {{ order.postal_code }}</p>
-                <p class="text-gray-600">Status: {{ order.address }}</p>
-                <p class="text-gray-600">Total price: {{ order.total }}</p>
+<section class="page-add cart-page-add">
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-lg-12">
+                <div class="page-breadcrumb">
+                    <h2>{{ title }}<span>.</span></h2>
+                </div>
+                <hr>
+                <a>{{ request.user.username }}</a>
+                <div class="total-info mt-2">
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <a href="{% url 'logout' %}" class="primary-btn chechout-btn">Log out</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-    {% else %}
-        <p class="mt-6">You have no orders yet.</p>
-    {% endif %}
+        </div>
+        <div class="row justify-content-start mb-2">
+            <div class="col-lg-6">
+                <div class="page-breadcrumb">
+                    <h2>My orders</h2>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% if orders %}
+            <div class="row align-items-end" id="product-list">
+                {% for order in orders %}
+                    <div class="col-lg-3 col-sm-6 mix all">
+                        <div class="single-product-item">
+                            <div>
+                                <h2 class="text-xl">Order #{{ order.id }}</h2>
+                                <p>Created at: {{ order.created }}</p>
+                                <p>Updated at: {{ order.updated }}</p>
+                                <p>First name: {{ order.first_name }}</p>
+                                <p>Last name: {{ order.last_name }}</p>
+                                <p>Email: {{ order.email }}</p>
+                                <p>City: {{ order.city }}</p>
+                                <p>Postal ocde: {{ order.postal_code }}</p>
+                                <p>Address: {{ order.address }}</p>
+                                <p>Total price: {{ order.total }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="mt-6">You have no orders yet.</p>
+        {% endif %}
+    </div>
+</section>
 {% endblock %}
