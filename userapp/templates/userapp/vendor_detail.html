@@ -18,7 +18,7 @@
                 {% for product in products %}
                     <div class="col-lg-3 col-sm-6 mix all {{ product.category.slug }}">
                         <div class="single-product-item">
-                            <a href="{% url 'edit_product' product.id %}">
+                            <a href="{% url 'product_detail' product.category.slug product.slug %}">
                                 <figure>
                                     {% if product.image %}
                                         {% load thumbnail %}
